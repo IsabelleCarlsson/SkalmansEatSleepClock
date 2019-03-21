@@ -5,4 +5,10 @@
     <string name="eat"><u>eat</u></string>
     <string name="sleep">sleep</string>
     <string name="drink">drink</string>
+    <string name="minute">Minute</string>
+    <string name="hour">Hour</string>
+    <string name="Red">Red</string>
+    <string name="Green">Green</string>
+    <string name="Blue">Blue</string>
+    <string name="Yellow">Yellow</string>
 </resources>

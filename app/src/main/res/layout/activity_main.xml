@@ -13,7 +13,8 @@
         android:layout_gravity="end"
         android:background="#6b8e37"
         android:textColor="@android:color/white"
-        android:layout_margin="10sp" />
+        android:layout_margin="10sp"
+        android:onClick="settingsClicked"/>
 
     <AnalogClock
         android:id="@+id/clock"

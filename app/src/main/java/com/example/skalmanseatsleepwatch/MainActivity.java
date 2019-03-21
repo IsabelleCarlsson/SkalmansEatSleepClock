@@ -1,9 +1,11 @@
 package com.example.skalmanseatsleepwatch;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.Time;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         (findViewById(R.id.vertical_layout)).invalidate();
     }
 
-//    public void settingsClicked(View view) {
-//        Intent intent = // Something here
-//        startActivityForResult(intent, SettingsActivity.SETTING_REQUEST);
-//    }
+    public void settingsClicked(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
 }

@@ -1,4 +1,8 @@
 <resources>
-    <string name="app_name">Skalman\'s Eat &#38; Sleep Watch</string>
+    <string name="app_name">Skalman\'s Eat &#38; Sleep Clock</string>
     <string name="action_settings">Settings</string>
+    <string name="time_to">Time to</string>
+    <string name="eat"><u>eat</u></string>
+    <string name="sleep">sleep</string>
+    <string name="drink">drink</string>
 </resources>

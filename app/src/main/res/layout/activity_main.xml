@@ -1,20 +1,55 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#c3e2f6">
+    android:background="#8ebc49"
+    android:orientation="vertical">
 
-    <AnalogClock
-        android:id="@+id/simpleAnalogClock"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/klocka"
-        android:padding="100dp"
+        android:text="@string/action_settings"
+        android:layout_gravity="end"
+        android:background="#6b8e37"
+        android:textColor="@android:color/white"
+        android:layout_margin="10sp" />
+
+    <AnalogClock
+        android:id="@+id/clock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="20sp"
         android:hand_hour="@drawable/hour"
         android:hand_minute="@drawable/minute"
-        android:dial="@drawable/empty"/>
+        android:dial="@drawable/klocka"/>
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/vertical_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:background="#6b8e37"
+        android:paddingEnd="10sp"
+        android:paddingStart="10sp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/time_to"
+            android:textSize="32sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="9sp"/>
+
+        <TextView
+            android:id="@+id/to_do"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,57 +1,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_activity"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#8ebc49"
-    android:orientation="vertical">
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/to_do"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/action_settings"
-        android:layout_gravity="end"
-        android:background="#6b8e37"
+        android:layout_marginBottom="40sp"
+        android:background="#d06100"
+        android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:layout_margin="10sp"
-        android:onClick="settingsClicked"/>
+        android:textSize="32sp" />
 
     <AnalogClock
         android:id="@+id/clock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="20sp"
-        android:hand_hour="@drawable/hour"
-        android:hand_minute="@drawable/minute"
-        android:dial="@drawable/klocka"/>
-
-    <LinearLayout
-        android:id="@+id/vertical_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:background="#6b8e37"
-        android:paddingEnd="10sp"
-        android:paddingStart="10sp">
+        android:layout_margin="20sp"
+        android:dial="@drawable/klocka"
+        android:hand_hour="@drawable/hour"
+        android:hand_minute="@drawable/minute" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/time_to"
-            android:textSize="32sp"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:layout_marginEnd="9sp"/>
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="10sp"
+        android:background="#d06100"
+        android:onClick="settingsClicked"
+        android:text="@string/action_settings"
+        android:textColor="@android:color/white" />
 
-        <TextView
-            android:id="@+id/to_do"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="32sp"
-            android:textAlignment="center"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
 </LinearLayout>

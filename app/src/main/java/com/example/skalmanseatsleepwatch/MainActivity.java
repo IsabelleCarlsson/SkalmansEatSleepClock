@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private String clockToast;
+    Time now = new Time();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +21,7 @@ public class MainActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         AnalogClock clock = findViewById(R.id.clock);
 
-
-        // Handler for updating To Do text
+        // Handler that updates To Do text
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -30,42 +30,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Perform click event on clock
+        // Shows toast when clock is clicked
         clock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, clockToast, Toast.LENGTH_SHORT).show(); // display a toast for analog clock
+                Toast.makeText(MainActivity.this, clockToast, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void updateTimeToText() {
+    private void updateTimeToText() {
         TextView to_do = findViewById(R.id.to_do);
-        Time now = new Time();
+        String toDo;
         now.setToNow();
         int mins = now.minute;
 
+
         // Update time to do text according to minutes
-        if ((mins >= 7 && mins <= 12) || (mins >= 17 && mins <= 21) || (mins >= 28 && mins <= 33) || (mins >= 38 && mins <= 42) || (mins >= 48 && mins <= 53)) {
-            to_do.setText(R.string.sleep);
-            clockToast = "Time to sleep";
-        } else if ((mins >= 0 && mins <= 6) || (mins >= 13 && mins <= 16) || (mins >= 34 && mins <= 37) || (mins >= 54 && mins <= 59)) {
-            to_do.setText(R.string.eat);
-            clockToast = "Time to eat";
+        if ((mins >= 7 && mins <= 12) || (mins >= 17 && mins <= 21) || (mins >= 28 && mins <= 33) || (mins >= 38 && mins <= 42) || (mins >= 48 && mins <= 55)) {
+            toDo = "Time to sleep";
+        } else if ((mins >= 0 && mins <= 6) || (mins >= 13 && mins <= 16) || (mins >= 34 && mins <= 37) || (mins >= 56 && mins <= 59)) {
+            toDo = "Time to eat";
         } else {
-            to_do.setText(R.string.drink);
-            clockToast = "Time to drink";
+            toDo = "Time to drink";
         }
-        (findViewById(R.id.vertical_layout)).invalidate();
+        to_do.setText(toDo);
+        clockToast = toDo;
     }
 
     public void settingsClicked(View view) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
-    }
-
-    public void setActivityBackgroundColor(int color) {
-        View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(color);
     }
 }

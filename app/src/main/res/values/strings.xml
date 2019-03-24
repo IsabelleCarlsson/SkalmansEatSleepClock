@@ -11,6 +11,9 @@
     <string name="green">Green</string>
     <string name="blue">Blue</string>
     <string name="yellow">Yellow</string>
-    <string name="settings_toggle">Toggle dial to be used for Time To Do text</string>
-    <string name="settings_radio">Select background color</string>
+    <string name="settings_size_text">Time To Do Size: 32sp</string>
+    <string name="images">images</string>
+    <string name="numbers">numbers</string>
+    <string name="hour_hand_switch">Hide Hour Hand</string>
+    <string name="dial_switch">Use Numbered Dials</string>
 </resources>

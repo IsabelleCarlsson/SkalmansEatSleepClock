@@ -3,12 +3,12 @@
     android:id="@+id/main_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/main_background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/to_do"
+        android:id="@+id/to_do_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40sp"
@@ -18,7 +18,7 @@
         android:textSize="32sp" />
 
     <AnalogClock
-        android:id="@+id/clock"
+        android:id="@+id/clock_widget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -28,10 +28,10 @@
         android:hand_minute="@drawable/minute" />
 
     <Button
-        android:id="@+id/settings"
+        android:id="@+id/settings_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
+        android:layout_gravity="center"
         android:layout_margin="10sp"
         android:background="#d06100"
         android:onClick="settingsClicked"

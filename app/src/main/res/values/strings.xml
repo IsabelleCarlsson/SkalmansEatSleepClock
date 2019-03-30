@@ -7,13 +7,7 @@
     <string name="drink">drink</string>
     <string name="minute">Minute</string>
     <string name="hour">Hour</string>
-    <string name="red">Red</string>
-    <string name="green">Green</string>
     <string name="blue">Blue</string>
-    <string name="yellow">Yellow</string>
     <string name="settings_size_text">Time To Do Size: 32sp</string>
-    <string name="images">images</string>
-    <string name="numbers">numbers</string>
-    <string name="hour_hand_switch">Hide Hour Hand</string>
-    <string name="dial_switch">Use Numbered Dials</string>
+    <string name="digital_switch">Use Digital Clock</string>
 </resources>

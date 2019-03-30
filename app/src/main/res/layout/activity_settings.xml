@@ -29,25 +29,13 @@
         android:progress="32"/>
 
     <Switch
-        android:id="@+id/hour_hand_switch"
+        android:id="@+id/type_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40sp"
         android:layout_marginEnd="40sp"
         android:layout_marginTop="20sp"
-        android:text="@string/hour_hand_switch"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:gravity="start" />
-
-    <Switch
-        android:id="@+id/dial_switch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40sp"
-        android:layout_marginEnd="40sp"
-        android:layout_marginTop="20sp"
-        android:text="@string/dial_switch"
+        android:text="@string/digital_switch"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:gravity="start" />

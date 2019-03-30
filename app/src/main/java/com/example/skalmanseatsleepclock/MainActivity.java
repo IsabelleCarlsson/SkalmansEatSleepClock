@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
 import android.widget.AnalogClock;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private String clockToast;
     private final Handler handler = new Handler();
     private TextView toDo;
-    AnalogClock clock;
+    AnalogClock analogClock;
+    TextClock digitalClock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toDo = findViewById(R.id.to_do_text);
-        clock = findViewById(R.id.clock_widget);
+        analogClock = findViewById(R.id.analog_clock);
+        digitalClock = findViewById(R.id.digital_clock);
+        digitalClock.setVisibility(View.GONE);
 
         // Handler that updates To Do text
         handler.post(new Runnable() {
@@ -34,8 +38,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Shows toast when clock is clicked
-        clock.setOnClickListener(new View.OnClickListener() {
+        // Shows toast when analogClock is clicked
+        analogClock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, clockToast, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Shows toast when digitalClock is clicked
+        digitalClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, clockToast, Toast.LENGTH_SHORT).show();
@@ -74,11 +86,18 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == SettingsActivity.SETTINGS_REQUEST) {
             if (resultCode == RESULT_OK) {
                 if (data != null) {
+                    // Change size according to setting
                     fontSize = data.getIntExtra("size", 32);
                     toDo.setTextSize(fontSize);
-                    data.getBooleanExtra("dial", false);
-                    // TODO: Set dial background to klocka_numbers.jpg
-                    // TODO: Figure out how to remove the hour dial
+
+                    // Handles digital/analog clock setting
+                    if (data.getBooleanExtra("digital", false)) {
+                        digitalClock.setVisibility(View.VISIBLE);
+                        analogClock.setVisibility(View.GONE);
+                    } else {
+                        analogClock.setVisibility(View.VISIBLE);
+                        digitalClock.setVisibility(View.GONE);
+                    }
                 }
             }
         }

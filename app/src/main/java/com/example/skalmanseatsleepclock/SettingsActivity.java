@@ -7,17 +7,16 @@ import android.view.MenuItem;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
     static final int SETTINGS_REQUEST = 32;
     private static int savedProgress = 32;
-    private static boolean dialChecked = false;
-    private static boolean hourHandChecked = false;
+    private static boolean digitalClockChecked = false;
     private int progressChangedValue;
     private TextView settingsSizeText;
     private SeekBar fontSizeSlider;
-    private Switch dialSwitch;
-    private Switch hourHandSwitch;
+    private Switch clockTypeSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         fontSizeSlider = findViewById(R.id.size_slider);
         settingsSizeText = findViewById(R.id.font_size_text);
-        dialSwitch = findViewById(R.id.dial_switch);
-        hourHandSwitch = findViewById(R.id.hour_hand_switch);
+        clockTypeSwitch = findViewById(R.id.type_switch);
 
         fontSizeSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -49,8 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         savedProgress = fontSizeSlider.getProgress();
-        dialChecked = dialSwitch.isChecked();
-        hourHandChecked = hourHandSwitch.isChecked();
+        digitalClockChecked = clockTypeSwitch.isChecked();
     }
 
     @Override
@@ -58,8 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onResume();
         settingsSizeText.setText(String.format("Time To Do Font Size: %ssp", savedProgress));
         fontSizeSlider.setProgress(savedProgress);
-        dialSwitch.setChecked(dialChecked);
-        hourHandSwitch.setChecked(hourHandChecked);
+        clockTypeSwitch.setChecked(digitalClockChecked);
     }
 
     @Override
@@ -68,9 +64,9 @@ public class SettingsActivity extends AppCompatActivity {
             case android.R.id.home:
                 Intent intent = new Intent();
                 intent.putExtra("size", fontSizeSlider.getProgress());
-                intent.putExtra("dial", dialSwitch.isChecked());
-                intent.putExtra("hourhand", hourHandSwitch.isChecked());
+                intent.putExtra("digital", clockTypeSwitch.isChecked());
                 setResult(RESULT_OK, intent);
+                Toast.makeText(SettingsActivity.this, "Settings saved", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }

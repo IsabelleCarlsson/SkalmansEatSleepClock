@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.view.View;
 import android.widget.AnalogClock;
 import android.widget.TextClock;
@@ -14,31 +13,39 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private String clockToast;
-    private final Handler handler = new Handler();
-    private TextView toDo;
-    AnalogClock analogClock;
-    TextClock digitalClock;
+    private Handler handler;
+    private TextView toDoView;
+    private String toDoText;
+    private AnalogClock analogClock;
+    private TextClock digitalClock;
+    private ToDoUpdater toDoUpdater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toDo = findViewById(R.id.to_do_text);
+        handler = new Handler();
+        toDoUpdater = new ToDoUpdater();
+        toDoView = findViewById(R.id.to_do_text);
         analogClock = findViewById(R.id.analog_clock);
         digitalClock = findViewById(R.id.digital_clock);
         digitalClock.setVisibility(View.GONE);
 
-        // Handler that updates To Do text
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                updateTimeToText();
-                handler.postDelayed(this, 1000);
+        if (savedInstanceState != null) {
+            toDoView.setTextSize(savedInstanceState.getInt("textSize"));
+            if (savedInstanceState.getBoolean("digitalClock")) {
+                digitalClock.setVisibility(View.VISIBLE);
+                analogClock.setVisibility(View.GONE);
+            } else {
+                analogClock.setVisibility(View.VISIBLE);
+                digitalClock.setVisibility(View.GONE);
             }
-        });
 
-        // Shows toast when analogClock is clicked
+        }
+        textHandler();
+
+        // Shows toast when analog clock is clicked
         analogClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Shows toast when digitalClock is clicked
+        // Shows toast when digital clock is clicked
         digitalClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,27 +62,31 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateTimeToText() {
-        String toDoString;
-        Time now = new Time();
-        now.setToNow();
-        int mins = now.minute;
-
-        // Update time to do text according to minutes
-        if ((mins >= 7 && mins <= 12) || (mins >= 17 && mins <= 21) || (mins >= 28 && mins <= 33) || (mins >= 38 && mins <= 42) || (mins >= 48 && mins <= 55)) {
-            toDoString = "Time to sleep";
-        } else if ((mins >= 0 && mins <= 6) || (mins >= 13 && mins <= 16) || (mins >= 34 && mins <= 37) || (mins >= 56 && mins <= 59)) {
-            toDoString = "Time to eat";
-        } else {
-            toDoString = "Time to drink";
-        }
-        toDo.setText(toDoString);
-        clockToast = toDoString;
+    public void textHandler() {
+        // Handler that updates To Do text
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                toDoUpdater.updateText();
+                toDoText = toDoUpdater.toString();
+                toDoView.setText(toDoText);
+                clockToast = toDoText;
+                handler.postDelayed(this, 1000);
+            }
+        });
     }
 
     public void settingsClicked(View view) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivityForResult(intent, SettingsActivity.SETTINGS_REQUEST);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("textSize", (int) (toDoView.getTextSize() / getResources().getDisplayMetrics().scaledDensity));
+        outState.putBoolean("digitalClock", digitalClock.isShown());
+        System.out.println((int) toDoView.getTextSize());
     }
 
     @Override
@@ -86,12 +97,13 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == SettingsActivity.SETTINGS_REQUEST) {
             if (resultCode == RESULT_OK) {
                 if (data != null) {
-                    // Change size according to setting
-                    fontSize = data.getIntExtra("size", 32);
-                    toDo.setTextSize(fontSize);
 
-                    // Handles digital/analog clock setting
-                    if (data.getBooleanExtra("digital", false)) {
+                    // Change text size according to slider progress
+                    fontSize = data.getIntExtra("toDoSize", 32);
+                    toDoView.setTextSize(fontSize);
+
+                    // Show/hide digital/analog clock according to switch state
+                    if (data.getBooleanExtra("digitalClock", false)) {
                         digitalClock.setVisibility(View.VISIBLE);
                         analogClock.setVisibility(View.GONE);
                     } else {

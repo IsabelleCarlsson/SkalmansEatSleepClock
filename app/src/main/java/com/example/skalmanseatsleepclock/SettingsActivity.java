@@ -63,10 +63,11 @@ public class SettingsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent();
-                intent.putExtra("size", fontSizeSlider.getProgress());
-                intent.putExtra("digital", clockTypeSwitch.isChecked());
+                intent.putExtra("toDoSize", fontSizeSlider.getProgress());
+                intent.putExtra("digitalClock", clockTypeSwitch.isChecked());
                 setResult(RESULT_OK, intent);
-                Toast.makeText(SettingsActivity.this, "Settings saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingsActivity.this, "Settings saved",
+                        Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }
